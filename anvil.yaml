@@ -8,5 +8,8 @@ runtime_options:
   legacy_features: {bootstrap3: true, class_names: true}
   server_spec: {base: python310-minimal}
   version: 3
-services: []
+services:
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/tables.yml
 startup_form: Form1

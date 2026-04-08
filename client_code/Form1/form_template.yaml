@@ -1,5 +1,10 @@
 components:
-- components: []
+- components:
+  - data_bindings: []
+    layout_properties: {grid_position: 'GFBUTK,LVDBWP'}
+    name: repeating_panel_1
+    properties: {item_template: Form1.ItemTemplate1}
+    type: RepeatingPanel
   layout_properties: {slot: default}
   name: content_panel
   properties: {col_widths: '{}'}
