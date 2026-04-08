@@ -1,11 +1,11 @@
 unique_ids:
   assets:
+    masters_logo.jpg: '1775679350873753009306455.7683'
     standard-page.html: FK5RW5RTDP5DHJF4DAWK2VQ7FY2KF25M
     theme.css: HDDRK5SM54WJWKQMRENHPOG6BYTMTPOQ
   forms:
     Form1: ZYAICP3JYBE7CMLCJUP5WPHOZIEB75NE
-    Form1.ItemTemplate1: '1775678090896230744454331.32852'
-    Form1.ItemTemplate1.RowTemplate1: '1775678768659881130826387.9996'
+    Form1.RowTemplate1: '1775679514287857609135222.3894'
   modules: {}
   scripts: {}
   server_modules:

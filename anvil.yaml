@@ -1,7 +1,8 @@
 allow_embedding: false
 dependencies: []
-name: M3 App 3
-package_name: M3_App_3
+metadata: {logo_img: 'asset:masters_logo.jpg', title: NYC Masters 2026}
+name: NYC Masters 2026
+package_name: NYC_Masters_2026
 renamed: true
 runtime_options:
   client_version: '3'

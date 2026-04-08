@@ -1,10 +1,28 @@
 components:
 - components:
-  - data_bindings: []
-    layout_properties: {grid_position: 'GFBUTK,LVDBWP'}
-    name: repeating_panel_1
-    properties: {item_template: Form1.ItemTemplate1}
-    type: RepeatingPanel
+  - components:
+    - name: repeating_panel_1
+      properties: {item_template: Form1.RowTemplate1}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'PCECPB,NWIMPH'}
+    name: data_test_leaderboard
+    properties:
+      columns:
+      - {data_key: column_1, id: JKSDUP, title: Person}
+      - {data_key: column_3, id: OJLQEN, title: avg_score}
+      - {data_key: column_4, id: GBBQST, title: Player 1}
+      - {data_key: column_5, id: CCTWMX, title: Score 1}
+      - {data_key: column_6, id: PKGTVD, title: P2}
+      - {data_key: column_7, id: OUWSGT, title: S2}
+      - {data_key: column_8, expand: false, id: PNMZJD, title: P3, width: 91.49609375}
+      - {data_key: column_1, id: AJHMTC, title: S3}
+      - {data_key: column_3, expand: false, id: EAEIER, title: P4}
+      - {data_key: column_4, id: BLZTLG, title: S4}
+      - {data_key: column_5, id: KKBGYM, title: P5}
+      - {data_key: column_6, id: WSIMGV, title: S5}
+      - {data_key: column_1, id: FUWAHO, title: P6}
+      - {data_key: column_3, id: JRJQFU, title: S6}
+    type: DataGrid
   layout_properties: {slot: default}
   name: content_panel
   properties: {col_widths: '{}'}
