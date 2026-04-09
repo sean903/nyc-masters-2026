@@ -11,5 +11,5 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     self.init_components(**properties)
 
-    data = anvil.server.call('get_person_leaderboard')
+    data = anvil.server.call('refresh_person_leaderboard')
     self.repeating_panel_1.items = data

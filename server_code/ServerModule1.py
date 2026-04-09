@@ -180,7 +180,12 @@ def score_one_person(leaderboard, person, picks):
 
 
 def build_person_leaderboard():
-  leaderboard = get_raw_leaderboard()
+  try:
+    leaderboard = get_raw_leaderboard()
+  except Exception as e:
+    logging.warning("Could not fetch leaderboard: %s. Showing picks without scores.", e)
+    leaderboard = pd.DataFrame(columns=["canonical_name", "name", "current_score"])
+
   rows = []
 
   for person, picks in PICKS.items():
@@ -201,11 +206,6 @@ def refresh_person_leaderboard():
 
   logging.info("Loaded %s rows into person_leaderboard", len(df))
   return df.to_dict(orient="records")
-
-
-@anvil.server.background_task
-def scheduled_refresh():
-  refresh_person_leaderboard()
 
 
 @anvil.server.callable
