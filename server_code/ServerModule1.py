@@ -1,18 +1,9 @@
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
 import anvil.server
-from anvil.tables import app_tables
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import json
-import logging
 import unicodedata
-
-
-logging.basicConfig(level=logging.INFO)
 
 
 PICKS = {
@@ -32,7 +23,6 @@ PICKS = {
   "Max": ["Bryson DeChambeau", "Jason Day", "Jacob Bridgeman", "Aldrich Potgieter", "Max Greyserman", "Fred Couples"],
   "Alex": ["Robert MacIntyre", "Si Woo Kim", "Marco Penge", "Ryan Gerard", "Tom McKibbin", "Naoyuki Kataoka"],
 }
-
 
 NAME_ALIASES = {
   "jj spaun": "jj spaun",
@@ -85,10 +75,8 @@ def parse_player_score(row):
   if raw in {"CUT", "MC"}:
     r1 = safe_int(row.get("round_1"))
     r2 = safe_int(row.get("round_2"))
-
     if r1 is not None and r2 is not None:
       return float((r1 - 72) + (r2 - 72))
-
     return 999.0
 
   if raw in {"WD", "DQ"}:
@@ -139,111 +127,33 @@ def get_raw_leaderboard():
 
 
 def score_one_person(leaderboard, person, picks):
-  player_rows = []
   total = 0.0
+  out = {"person": person}
 
   for i, player in enumerate(picks, start=1):
     key = canonical_name(player)
     match = leaderboard[leaderboard["canonical_name"] == key]
 
     if match.empty:
-      actual_name = player
       score = 999.0
-      found = False
     else:
-      row = match.iloc[0]
-      actual_name = row["name"]
-      score = row["current_score"]
-      found = True
+      score = match.iloc[0]["current_score"]
 
     total += score
-    player_rows.append({
-      "slot": i,
-      "pick_name": player,
-      "matched_name": actual_name,
-      "score": score,
-      "found": found,
-    })
+    out[f"player_{i}"] = player
+    out[f"score_{i}"] = score
 
-  avg_score = total / 6.0
-
-  out = {
-    "person": person,
-    "avg_score": avg_score,
-  }
-
-  for p in player_rows:
-    i = p["slot"]
-    out[f"player_{i}"] = p["pick_name"]
-    out[f"matched_player_{i}"] = p["matched_name"]
-    out[f"score_{i}"] = p["score"]
-    out[f"found_{i}"] = p["found"]
-
+  out["avg_score"] = total / 6.0
   return out
 
 
-def build_person_leaderboard():
+@anvil.server.callable
+def get_person_leaderboard():
   leaderboard = get_raw_leaderboard()
   rows = []
 
   for person, picks in PICKS.items():
     rows.append(score_one_person(leaderboard, person, picks))
 
-  df = pd.DataFrame(rows).sort_values("avg_score").reset_index(drop=True)
-  return df
-
-
-@anvil.server.callable
-def refresh_person_leaderboard():
-  df = build_person_leaderboard()
-
-  app_tables.person_leaderboard.delete_all_rows()
-
-  for record in df.to_dict(orient="records"):
-    app_tables.person_leaderboard.add_row(**record)
-
-  logging.info("Loaded %s rows into person_leaderboard", len(df))
-  return df.to_dict(orient="records")
-
-
-@anvil.server.background_task
-def scheduled_refresh():
-  refresh_person_leaderboard()
-
-
-@anvil.server.callable
-def get_person_leaderboard():
-  rows = app_tables.person_leaderboard.search()
-
-  data = []
-  for row in rows:
-    data.append({
-      "person": row["person"],
-      "avg_score": row["avg_score"],
-      "player_1": row["player_1"],
-      "matched_player_1": row["matched_player_1"],
-      "score_1": row["score_1"],
-      "found_1": row["found_1"],
-      "player_2": row["player_2"],
-      "matched_player_2": row["matched_player_2"],
-      "score_2": row["score_2"],
-      "found_2": row["found_2"],
-      "player_3": row["player_3"],
-      "matched_player_3": row["matched_player_3"],
-      "score_3": row["score_3"],
-      "found_3": row["found_3"],
-      "player_4": row["player_4"],
-      "matched_player_4": row["matched_player_4"],
-      "score_4": row["score_4"],
-      "found_4": row["found_4"],
-      "player_5": row["player_5"],
-      "matched_player_5": row["matched_player_5"],
-      "score_5": row["score_5"],
-      "found_5": row["found_5"],
-      "player_6": row["player_6"],
-      "matched_player_6": row["matched_player_6"],
-      "score_6": row["score_6"],
-      "found_6": row["found_6"],
-    })
-
-  return sorted(data, key=lambda x: x["avg_score"])
+  rows = sorted(rows, key=lambda x: x["avg_score"])
+  return rows

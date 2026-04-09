@@ -8,7 +8,7 @@ components:
     name: data_test_leaderboard
     properties:
       columns:
-      - {data_key: person, id: JKSDUP, title: Person}
+      - {data_key: person, id: JKSDUP, title: person}
       - {data_key: avg_score, id: OJLQEN, title: avg_score}
       - {data_key: player_1, id: GBBQST, title: Player 1}
       - {data_key: score_1, id: CCTWMX, title: Score 1}
