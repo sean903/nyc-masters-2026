@@ -203,6 +203,11 @@ def refresh_person_leaderboard():
   return df.to_dict(orient="records")
 
 
+@anvil.server.background_task
+def scheduled_refresh():
+  refresh_person_leaderboard()
+
+
 @anvil.server.callable
 def get_person_leaderboard():
   rows = app_tables.person_leaderboard.search()
