@@ -219,6 +219,25 @@ def build_person_leaderboard():
   return df
 
 
+def format_score(x):
+  if x is None:
+    return ""
+  if x >= 997:
+    return "N/A"
+  if x == 0:
+    return "E"
+  return f"{x:+g}"
+
+
+def format_for_display(records):
+  for i, row in enumerate(records, start=1):
+    row["rank"] = i
+    row["avg_score"] = format_score(row["avg_score"])
+    for n in range(1, 7):
+      row[f"score_{n}"] = format_score(row[f"score_{n}"])
+  return records
+
+
 @anvil.server.callable
 def refresh_person_leaderboard():
   df = build_person_leaderboard()
@@ -229,7 +248,7 @@ def refresh_person_leaderboard():
     app_tables.person_leaderboard.add_row(**record)
 
   logging.info("Loaded %s rows into person_leaderboard", len(df))
-  return df.to_dict(orient="records")
+  return format_for_display(df.to_dict(orient="records"))
 
 
 @anvil.server.callable
@@ -238,33 +257,11 @@ def get_person_leaderboard():
 
   data = []
   for row in rows:
-    data.append({
-      "person": row["person"],
-      "avg_score": row["avg_score"],
-      "player_1": row["player_1"],
-      "matched_player_1": row["matched_player_1"],
-      "score_1": row["score_1"],
-      "found_1": row["found_1"],
-      "player_2": row["player_2"],
-      "matched_player_2": row["matched_player_2"],
-            "score_2": row["score_2"],
-            "found_2": row["found_2"],
-            "player_3": row["player_3"],
-            "matched_player_3": row["matched_player_3"],
-            "score_3": row["score_3"],
-            "found_3": row["found_3"],
-            "player_4": row["player_4"],
-            "matched_player_4": row["matched_player_4"],
-            "score_4": row["score_4"],
-            "found_4": row["found_4"],
-            "player_5": row["player_5"],
-            "matched_player_5": row["matched_player_5"],
-            "score_5": row["score_5"],
-            "found_5": row["found_5"],
-            "player_6": row["player_6"],
-            "matched_player_6": row["matched_player_6"],
-            "score_6": row["score_6"],
-            "found_6": row["found_6"],
-        })
+    record = {"person": row["person"], "avg_score": row["avg_score"]}
+    for n in range(1, 7):
+      record[f"player_{n}"] = row[f"player_{n}"]
+      record[f"score_{n}"] = row[f"score_{n}"]
+    data.append(record)
 
-    return sorted(data, key=lambda x: x["avg_score"])
+  data = sorted(data, key=lambda x: x["avg_score"])
+  return format_for_display(data)
