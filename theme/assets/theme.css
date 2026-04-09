@@ -1101,19 +1101,15 @@ div.plot-container.plotly svg.main-svg {
   border-bottom: 1px solid #dee5db;
 }
 
-/* DataGrid outer border */
+/* DataGrid outer border + horizontal scroll */
 .anvil-data-grid {
   border: 1px solid #006747;
   border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Horizontal scroll on mobile */
-.content {
-  overflow-x: auto !important;
+  overflow-x: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
 }
-.anvil-data-grid {
+.anvil-data-grid > * {
   min-width: 1200px;
 }
 
