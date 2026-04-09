@@ -170,11 +170,15 @@ def score_one_person(leaderboard, person, picks):
     if match.empty:
       actual_name = player
       score = 999.0
+      thru = ""
       found = False
     else:
       row = match.iloc[0]
       actual_name = row["name"]
       score = row["current_score"]
+      thru = str(row.get("hole", "")).strip()
+      if thru == "-":
+        thru = ""
       found = True
 
     total += score
@@ -183,6 +187,7 @@ def score_one_person(leaderboard, person, picks):
       "pick_name": player,
       "matched_name": actual_name,
       "score": score,
+      "thru": thru,
       "found": found,
     })
 
@@ -198,6 +203,7 @@ def score_one_person(leaderboard, person, picks):
     out[f"player_{i}"] = p["pick_name"]
     out[f"matched_player_{i}"] = p["matched_name"]
     out[f"score_{i}"] = p["score"]
+    out[f"thru_{i}"] = p["thru"]
     out[f"found_{i}"] = p["found"]
 
   return out

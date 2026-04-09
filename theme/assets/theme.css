@@ -1110,7 +1110,7 @@ div.plot-container.plotly svg.main-svg {
   -webkit-overflow-scrolling: touch;
 }
 .anvil-data-grid > * {
-  min-width: 1200px;
+  min-width: 1600px;
 }
 
 /* Pagination styling */
