@@ -119,7 +119,7 @@ runtime_options:
   legacy_features: {bootstrap3: true, class_names: true}
   server_spec: {base: python310-minimal}
   version: 3
-scheduled_tasks: []
+scheduled_tasks: null
 services:
 - client_config: {}
   server_config: {}

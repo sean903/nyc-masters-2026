@@ -206,7 +206,7 @@ def refresh_person_leaderboard():
   return df.to_dict(orient="records")
 
 
-@anvil.server.background_task
+@anvil.server.callable
 def scheduled_refresh():
   refresh_person_leaderboard()
 
