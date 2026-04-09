@@ -13,21 +13,21 @@ logging.basicConfig(level=logging.INFO)
 
 
 PICKS = {
-  "Aaron": ["Tommy Fleetwood", "Brooks Koepka", "Rasmus Højgaard", "Brian Harman", "Andrew Novak", "Jose Maria Olazabal"],
+  "James": ["Tommy Fleetwood", "Brooks Koepka", "Rasmus Højgaard", "Brian Harman", "Andrew Novak", "Jose Maria Olazabal"],
   "Abs": ["Patrick Reed", "Justin Thomas", "Cameron Smith", "Ryan Fox", "Michael Kim", "Vijay Singh"],
-  "Aidan": ["Cameron Young", "Jake Knapp", "J.J. Spaun", "Kristoffer Reitan", "Haotong Li", "Danny Willett"],
-  "Alex": ["Matt Fitzpatrick", "Akshay Bhatia", "Gary Woodland", "Sam Stevens", "Charl Schwartzel", "Davis Riley"],
-  "Cam": ["Collin Morikawa", "Russell Henley", "Sungjae Im", "Aaron Rai", "Sami Valimaki", "Zach Johnson"],
-  "Jack": ["Min Woo Lee", "Viktor Hovland", "Ben Griffin", "Wyndham Clark", "Rasmus Neergaard-Petersen", "Brian Campbell"],
-  "Jack H": ["Ludvig Åberg", "Nicolai Højgaard", "Tyrrell Hatton", "Keegan Bradley", "Matt McCarty", "Brandon Holtz"],
-  "James": ["Jon Rahm", "Shane Lowry", "Daniel Berger", "Dustin Johnson", "John Keefer", "Fifa Laopakdee"],
-  "Joe": ["Hideki Matsuyama", "Adam Scott", "Sam Burns", "Max Homa", "Nick Taylor", "Mason Howell"],
-  "Lewis": ["Rory McIlroy", "Maverick McNealy", "Harris English", "Alex Noren", "Bubba Watson", "Mateo Pulcini"],
-  "Mark": ["Xander Schauffele", "Patrick Cantlay", "Corey Conners", "Harry Hall", "Nicolas Echavarria", "Jackson Herrington"],
-  "Max": ["Justin Rose", "Chris Gotterup", "Sepp Straka", "Casey Jarvis", "Carlos Ortiz", "Angel Cabrera"],
+  "Joe": ["Cameron Young", "Jake Knapp", "J.J. Spaun", "Kristoffer Reitan", "Haotong Li", "Danny Willett"],
+  "Lew": ["Matt Fitzpatrick", "Akshay Bhatia", "Gary Woodland", "Sam Stevens", "Charl Schwartzel", "Davis Riley"],
+  "Jack H": ["Collin Morikawa", "Russell Henley", "Sungjae Im", "Aaron Rai", "Sami Valimaki", "Zach Johnson"],
+  "Mark": ["Min Woo Lee", "Viktor Hovland", "Ben Griffin", "Wyndham Clark", "Rasmus Neergaard-Petersen", "Brian Campbell"],
+  "Tom D": ["Ludvig Åberg", "Nicolai Højgaard", "Tyrrell Hatton", "Keegan Bradley", "Matt McCarty", "Brandon Holtz"],
+  "Jack D": ["Jon Rahm", "Shane Lowry", "Daniel Berger", "Dustin Johnson", "John Keefer", "Fifa Laopakdee"],
+  "Aidan": ["Hideki Matsuyama", "Adam Scott", "Sam Burns", "Max Homa", "Nick Taylor", "Mason Howell"],
+  "Cam": ["Rory McIlroy", "Maverick McNealy", "Harris English", "Alex Noren", "Bubba Watson", "Mateo Pulcini"],
+  "Tom B": ["Xander Schauffele", "Patrick Cantlay", "Corey Conners", "Harry Hall", "Nicolas Echavarria", "Jackson Herrington"],
+  "Aaron": ["Justin Rose", "Chris Gotterup", "Sepp Straka", "Casey Jarvis", "Carlos Ortiz", "Angel Cabrera"],
   "Sean": ["Scottie Scheffler", "Jordan Spieth", "Kurt Kitayama", "Sergio Garcia", "Michael Brennan", "Ethan Fang"],
-  "Tom": ["Bryson DeChambeau", "Jason Day", "Jacob Bridgeman", "Aldrich Potgieter", "Max Greyserman", "Fred Couples"],
-  "Tom D": ["Robert MacIntyre", "Si Woo Kim", "Marco Penge", "Ryan Gerard", "Tom McKibbin", "Naoyuki Kataoka"],
+  "Max": ["Bryson DeChambeau", "Jason Day", "Jacob Bridgeman", "Aldrich Potgieter", "Max Greyserman", "Fred Couples"],
+  "Alex": ["Robert MacIntyre", "Si Woo Kim", "Marco Penge", "Ryan Gerard", "Tom McKibbin", "Naoyuki Kataoka"],
 }
 
 
