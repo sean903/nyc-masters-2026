@@ -71,7 +71,7 @@ def safe_int(value):
 def parse_player_score(row):
   raw = str(row.get("current_score_raw", "")).strip().upper()
 
-  if raw == "E":
+  if raw in {"E", "-", ""}:
     return 0.0
 
   try:
@@ -86,10 +86,10 @@ def parse_player_score(row):
     if r1 is not None and r2 is not None:
       return float((r1 - 72) + (r2 - 72))
 
-    return 999.0
+    return 997.0
 
   if raw in {"WD", "DQ"}:
-    return 999.0
+    return 998.0
 
   return 999.0
 
@@ -105,7 +105,13 @@ def get_raw_leaderboard():
   r.raise_for_status()
 
   soup = BeautifulSoup(r.content, "html.parser")
-  script_tag = soup.find("script", {"id": "leaderboard-seo-data"})
+
+  # Find the JSON-LD script tag (no longer has a specific id)
+  script_tag = None
+  for tag in soup.find_all("script", {"type": "application/ld+json"}):
+    if tag.string and "csvw:columns" in tag.string:
+      script_tag = tag
+      break
 
   if not script_tag or not script_tag.string:
     raise ValueError("Could not find leaderboard JSON")
@@ -113,21 +119,30 @@ def get_raw_leaderboard():
   leader_json = json.loads(script_tag.string)
   columns = leader_json["mainEntity"]["csvw:tableSchema"]["csvw:columns"]
 
+  col_names = [col.get("csvw:name", "") for col in columns]
   data = []
-  for i in range(8):
-    data.append([item["csvw:value"] for item in columns[i]["csvw:cells"]])
+  for col in columns:
+    data.append([item["csvw:value"] for item in col["csvw:cells"]])
 
   leaderboard = pd.DataFrame(data).transpose()
-  leaderboard.columns = [
-    "position",
-    "name",
-    "current_score_raw",
-    "hole",
-    "round_1",
-    "round_2",
-    "round_3",
-    "round_4",
-  ]
+  leaderboard.columns = col_names
+
+  # Map to consistent column names
+  col_map = {
+    "POS": "position",
+    "PLAYER": "name",
+    "TOT": "current_score_raw",
+    "THRU": "hole",
+    "R1": "round_1",
+    "R2": "round_2",
+    "R3": "round_3",
+    "R4": "round_4",
+  }
+  leaderboard.rename(columns=col_map, inplace=True)
+
+  for needed in ["position", "name", "current_score_raw", "round_1", "round_2"]:
+    if needed not in leaderboard.columns:
+      leaderboard[needed] = "-"
 
   leaderboard["canonical_name"] = leaderboard["name"].apply(canonical_name)
   leaderboard["current_score"] = leaderboard.apply(parse_player_score, axis=1)
@@ -142,6 +157,15 @@ def score_one_person(leaderboard, person, picks):
   for i, player in enumerate(picks, start=1):
     key = canonical_name(player)
     match = leaderboard[leaderboard["canonical_name"] == key]
+
+    # Fallback: match on last name + first initial (handles "J. Keefer" vs "John Keefer")
+    if match.empty and " " in key:
+      last_name = key.split()[-1]
+      first_initial = key[0]
+      match = leaderboard[
+        (leaderboard["canonical_name"].str.endswith(last_name)) &
+        (leaderboard["canonical_name"].str.startswith(first_initial))
+      ]
 
     if match.empty:
       actual_name = player
