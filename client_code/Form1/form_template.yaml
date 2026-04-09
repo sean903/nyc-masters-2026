@@ -19,7 +19,7 @@ components:
       - {data_key: player_4, expand: false, id: EAEIER, title: P4}
       - {data_key: score_4, id: BLZTLG, title: S4}
       - {data_key: player_5, id: KKBGYM, title: P5}
-      - {data_key: score_6, id: WSIMGV, title: S5}
+      - {data_key: score_5, id: WSIMGV, title: S5}
       - {data_key: player_6, id: FUWAHO, title: P6}
       - {data_key: score_6, id: JRJQFU, title: S6}
     type: DataGrid
