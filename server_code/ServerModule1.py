@@ -206,7 +206,7 @@ def refresh_person_leaderboard():
   return df.to_dict(orient="records")
 
 
-@anvil.server.callable
+@anvil.server.background_task
 def scheduled_refresh():
   refresh_person_leaderboard()
 
@@ -226,24 +226,24 @@ def get_person_leaderboard():
       "found_1": row["found_1"],
       "player_2": row["player_2"],
       "matched_player_2": row["matched_player_2"],
-            "score_2": row["score_2"],
-            "found_2": row["found_2"],
-            "player_3": row["player_3"],
-            "matched_player_3": row["matched_player_3"],
-            "score_3": row["score_3"],
-            "found_3": row["found_3"],
-            "player_4": row["player_4"],
-            "matched_player_4": row["matched_player_4"],
-            "score_4": row["score_4"],
-            "found_4": row["found_4"],
-            "player_5": row["player_5"],
-            "matched_player_5": row["matched_player_5"],
-            "score_5": row["score_5"],
-            "found_5": row["found_5"],
-            "player_6": row["player_6"],
-            "matched_player_6": row["matched_player_6"],
-            "score_6": row["score_6"],
-            "found_6": row["found_6"],
-        })
+      "score_2": row["score_2"],
+      "found_2": row["found_2"],
+      "player_3": row["player_3"],
+      "matched_player_3": row["matched_player_3"],
+      "score_3": row["score_3"],
+      "found_3": row["found_3"],
+      "player_4": row["player_4"],
+      "matched_player_4": row["matched_player_4"],
+      "score_4": row["score_4"],
+      "found_4": row["found_4"],
+      "player_5": row["player_5"],
+      "matched_player_5": row["matched_player_5"],
+      "score_5": row["score_5"],
+      "found_5": row["found_5"],
+      "player_6": row["player_6"],
+      "matched_player_6": row["matched_player_6"],
+      "score_6": row["score_6"],
+      "found_6": row["found_6"],
+    })
 
-    return sorted(data, key=lambda x: x["avg_score"])
+  return sorted(data, key=lambda x: x["avg_score"])
