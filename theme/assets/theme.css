@@ -1109,12 +1109,11 @@ div.plot-container.plotly svg.main-svg {
 }
 
 /* Horizontal scroll on mobile */
-.anvil-data-grid {
-  overflow-x: auto;
+.content {
+  overflow-x: auto !important;
   -webkit-overflow-scrolling: touch;
 }
-.anvil-data-grid .data-grid-header,
-.anvil-data-grid .data-row-panel {
+.anvil-data-grid {
   min-width: 1200px;
 }
 
