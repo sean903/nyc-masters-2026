@@ -8,20 +8,21 @@ components:
     name: data_test_leaderboard
     properties:
       columns:
-      - {data_key: person, id: JKSDUP, title: Person}
-      - {data_key: avg_score, id: OJLQEN, title: avg_score}
-      - {data_key: player_1, id: GBBQST, title: Player 1}
-      - {data_key: score_1, id: CCTWMX, title: Score 1}
-      - {data_key: player_2, id: PKGTVD, title: P2}
-      - {data_key: score_2, id: OUWSGT, title: S2}
-      - {data_key: player_3, expand: false, id: PNMZJD, title: P3, width: 91.49609375}
-      - {data_key: score_3, id: AJHMTC, title: S3}
-      - {data_key: player_4, expand: false, id: EAEIER, title: P4}
-      - {data_key: score_4, id: BLZTLG, title: S4}
-      - {data_key: player_5, id: KKBGYM, title: P5}
-      - {data_key: score_5, id: WSIMGV, title: S5}
-      - {data_key: player_6, id: FUWAHO, title: P6}
-      - {data_key: score_6, id: JRJQFU, title: S6}
+      - {data_key: rank, id: RNKPOS, title: '#'}
+      - {data_key: person, id: JKSDUP, title: Name}
+      - {data_key: avg_score, id: OJLQEN, title: Avg}
+      - {data_key: player_1, id: GBBQST, title: Pick 1}
+      - {data_key: score_1, id: CCTWMX, title: Score}
+      - {data_key: player_2, id: PKGTVD, title: Pick 2}
+      - {data_key: score_2, id: OUWSGT, title: Score}
+      - {data_key: player_3, id: PNMZJD, title: Pick 3}
+      - {data_key: score_3, id: AJHMTC, title: Score}
+      - {data_key: player_4, id: EAEIER, title: Pick 4}
+      - {data_key: score_4, id: BLZTLG, title: Score}
+      - {data_key: player_5, id: KKBGYM, title: Pick 5}
+      - {data_key: score_5, id: WSIMGV, title: Score}
+      - {data_key: player_6, id: FUWAHO, title: Pick 6}
+      - {data_key: score_6, id: JRJQFU, title: Score}
     type: DataGrid
   layout_properties: {slot: default}
   name: content_panel

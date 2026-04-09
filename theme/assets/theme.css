@@ -1046,3 +1046,70 @@ div.plot-container.plotly svg.main-svg {
 .anvil-spinner {
     --anvil-spinner-bg: %color:Surface Variant%;
 }
+
+
+/* ===== Masters Leaderboard Styles ===== */
+
+/* App bar - Masters green */
+.app-bar {
+  background-color: #006747 !important;
+  color: #FFC72C !important;
+}
+.app-bar.scrolled {
+  background: #006747 !important;
+}
+.app-bar .title, .app-bar a, .app-bar .link-text {
+  color: #FFC72C !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* DataGrid header row - dark green with yellow text */
+.anvil-data-grid .data-grid-header {
+  background-color: #006747 !important;
+  color: #FFC72C !important;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.anvil-data-grid .data-grid-header .label-text {
+  color: #FFC72C !important;
+}
+
+/* Alternating row stripes */
+.anvil-data-grid .data-row-panel:nth-child(odd) {
+  background-color: #f4faf6;
+}
+.anvil-data-grid .data-row-panel:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* Row hover */
+.anvil-data-grid .data-row-panel:hover {
+  background-color: #e0f2e9 !important;
+}
+
+/* First row (leader) highlight */
+.anvil-data-grid .data-row-panel:first-child {
+  background-color: #FFF8E1 !important;
+  font-weight: 600;
+}
+
+/* Subtle row borders */
+.anvil-data-grid .data-row-panel {
+  border-bottom: 1px solid #dee5db;
+}
+
+/* DataGrid outer border */
+.anvil-data-grid {
+  border: 1px solid #006747;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Pagination styling */
+.anvil-data-grid .data-grid-footer {
+  background-color: #f4faf6;
+  border-top: 2px solid #006747;
+}
